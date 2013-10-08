@@ -1,11 +1,13 @@
 # -*- coding: utf-8 -*-
-import threading
+
+#import threading
+import multiprocessing 
 
 class ChocolateBoiler(object):
     def __init__(self):
         self._empty = True
         self._boiled = False
-        self._locker = threading.Lock()
+        self._locker = multiprocessing.Lock()
 
     def fill(self):
         with self._locker:
@@ -30,21 +32,23 @@ class ChocolateBoiler(object):
 # 簡単に新しいオブジェクトを生成できないようにする
 ChocolateBoiler = ChocolateBoiler()
 
-if __name__ == '__main__':
 
-    def Process(name):
-        for i in range(3):
-            print "\n* %s start processing..." % name
-            ChocolateBoiler.fill()
-            ChocolateBoiler.boil()
-            ChocolateBoiler.drain()
+def func(name):
+    for i in range(100):
+        print "\n* %s start funcing..." % name
+        ChocolateBoiler.fill()
+        ChocolateBoiler.boil()
+        ChocolateBoiler.drain()
             
-            # Singleton パターンには従っているが、
-            # 結局、各々のメソッドはスレッドセーフではない。
-            # スレッドセーフにするためには、各スレッドに同期機構が必要。
-            
-    a = threading.Thread(target=Process, args="A")
-    b = threading.Thread(target=Process, args="B")
+        # Singleton パターンには従っているが、
+        # 結局、各々のメソッドはスレッドセーフではない。
+        # スレッドセーフにするためには、各スレッドに同期機構が必要。
+
+
+if __name__ == '__main__':
+  
+    a = multiprocessing.Process(target=func, args="A")
+    b = multiprocessing.Process(target=func, args="B")
     
     a.start()
     b.start()
