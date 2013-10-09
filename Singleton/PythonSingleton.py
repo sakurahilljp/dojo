@@ -28,8 +28,8 @@ class ChocolateBoiler(object):
                 self._boiled = True
                 print '[2] Chocolate has been boiled.'
 
-# クラス定義をオブジェクトで上書きして、
-# 簡単に新しいオブジェクトを生成できないようにする
+# Overwrite the class definition with its object
+# to make it difficult to create another object.
 ChocolateBoiler = ChocolateBoiler()
 
 
