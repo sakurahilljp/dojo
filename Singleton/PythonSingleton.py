@@ -32,18 +32,12 @@ class ChocolateBoiler(object):
 # to make it difficult to create another object.
 ChocolateBoiler = ChocolateBoiler()
 
-
 def func(name):
     for i in range(100):
         print "\n* %s start funcing..." % name
         ChocolateBoiler.fill()
         ChocolateBoiler.boil()
         ChocolateBoiler.drain()
-            
-        # Singleton パターンには従っているが、
-        # 結局、各々のメソッドはスレッドセーフではない。
-        # スレッドセーフにするためには、各スレッドに同期機構が必要。
-
 
 if __name__ == '__main__':
   
