@@ -24,7 +24,8 @@ class RemoteController(object):
     def show(self):
         print 'Intelligent Remote Controller:'
         for key in self._switches.iterkeys():
-            print "[%d] %s,%s" % ( key, self._switches[key]['on'], self._switches[key]['off']);
+            print "[%d] %s,%s" % ( key, self._switches[key]['on'], 
+                                   self._switches[key]['off']);
         else:
             print ''
             
@@ -84,12 +85,13 @@ class FanOffCommand(FanCommand):
 
 if __name__ == '__main__':
     
-    # equipments
+    # Create equipments
     gate_light = Light("Gate")
     entrance_light = Light("Entrance")
     living_fan = Fan('Living')
     kitchen_fan = Fan('Kitchen')
 
+    # Create a controller and congigure it.
     controller = RemoteController()
     controller.add(0, LightOnCommand(gate_light), LightOffCommand(gate_light));
     controller.add(1, LightOnCommand(entrance_light), LightOffCommand(entrance_light));
@@ -97,6 +99,7 @@ if __name__ == '__main__':
     controller.add(3, FanOnCommand(kitchen_fan), FanOffCommand(kitchen_fan));
     controller.show()
 
+    # Control equipment
     controller.on(0)
     controller.off(0)
 
